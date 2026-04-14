@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Rukhsar ❤️</title>
+
+<style>
+body {
+  margin:0;
+  font-family: Arial;
+  text-align:center;
+  background: linear-gradient(#ffd6e0, #ffeef2);
+  overflow-x:hidden;
+}
+
+/* PAGE */
+.page {
+  display:none;
+  min-height:100vh;
+  padding:20px;
+  box-sizing:border-box;
+}
+
+.active { display:block; }
+
+/* HEADER */
+.glow {
+  font-size:8vw;
+  color:#ff4d6d;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow:0 0 10px #fff, 0 0 20px #ff4d6d; }
+  to { text-shadow:0 0 25px #ff99aa, 0 0 40px #ff4d6d; }
+}
+
+/* BUTTON */
+button {
+  padding:12px 20px;
+  font-size:16px;
+  border:none;
+  border-radius:25px;
+  background:#ff4d6d;
+  color:white;
+  margin:10px;
+}
+
+/* HEART */
+.heart {
+  font-size:15vw;
+  animation: beat 1s infinite;
+}
+
+@keyframes beat {
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+
+/* TIMELINE */
+.timeline {
+  width:90%;
+  margin:10px auto;
+  padding:15px;
+  background:white;
+  border-radius:15px;
+  box-shadow:0 0 15px rgba(0,0,0,0.1);
+  font-size:4.2vw;
+  line-height:1.6;
+  color:#ff4d6d;
+  font-weight:bold;
+}
+
+/* LOVE NOTE */
+#typeLoveNote {
+  font-size:4.2vw;
+  width:90%;
+  margin:auto;
+  text-align:left;
+  color:#d1004b;
+  line-height:1.6;
+}
+
+/* FLOAT HEARTS */
+.floating-heart {
+  position:fixed;
+  bottom:-10px;
+  animation: floatUp 5s linear forwards;
+}
+
+@keyframes floatUp {
+  0%{transform:translateY(0); opacity:1;}
+  100%{transform:translateY(-100vh); opacity:0;}
+}
+
+/* NO BUTTON */
+#noBtn {
+  position:absolute;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="p1" class="page active">
+  <h1 class="glow">Hey Rukhsar ❤️</h1>
+
+  <div class="timeline" id="timeline"></div>
+
+  <button onclick="next('p2')">Mujhe Dabao 🔥</button>
+</div>
+
+<!-- RUDE -->
+<div id="p2" class="page">
+  <h2>Wanna rude with me again? 😐</h2>
+  <button onclick="next('p3')">Yes 😡</button>
+  <button onclick="rudeNo()">No ❤️</button>
+</div>
+
+<!-- TYPE PAGE -->
+<div id="typePage" class="page">
+  <p id="typeText"></p>
+</div>
+
+<!-- MISS -->
+<div id="p3" class="page">
+  <h2>Do you miss me? 😢</h2>
+  <button onclick="missYes()">Yes ❤️</button>
+  <button id="noBtn" onmouseover="moveNo()">No 😜</button>
+</div>
+
+<div id="a1" class="page">
+  <h2>I miss you too jana ❤️</h2>
+</div>
+
+<!-- LOVE -->
+<div id="p4" class="page">
+  <h2>Do you love me? ❤️</h2>
+  <button onclick="loveYes()">Yes 💖</button>
+</div>
+
+<div id="a2" class="page">
+  <h2>love you too sweetheart ❤️</h2>
+</div>
+
+<!-- LIVE -->
+<div id="p5" class="page">
+  <h2>Wanna live with me? 🥺</h2>
+  <button onclick="liveYes()">Yes 💍</button>
+  <button onclick="liveNo()">No 😈</button>
+</div>
+
+<div id="a3yes" class="page">
+  <h2>good bby ❤️</h2>
+</div>
+
+<div id="a3no" class="page">
+  <h2>marna ha tuje 😈</h2>
+</div>
+
+<!-- FINAL -->
+<div id="final" class="page">
+  <div class="heart">💖</div>
+
+  <h2>💌 Love Note</h2>
+
+  <p id="typeLoveNote"></p>
+
+  <button onclick="next('proposal')">Will you be mine forever? 💍</button>
+</div>
+
+<!-- PROPOSAL -->
+<div id="proposal" class="page">
+  <h2>She said YES 😍💍❤️</h2>
+</div>
+
+<script>
+
+/* TIMELINE FIXED */
+function updateTimeline(){
+
+  let start = new Date("2024-08-14");
+  let now = new Date();
+
+  let diff = now - start;
+
+  let days = Math.floor(diff / (1000*60*60*24));
+
+  let years = Math.floor(days / 365);
+  let months = Math.floor((days % 365) / 30);
+
+  document.getElementById("timeline").innerHTML =
+  `💞 Together Since 14 Aug 2024<br>
+   📅 Total Days: ${days}<br>
+   📆 ${years} Year ${months} Months<br>
+   💖 Still Strong ❤️`;
+}
+
+updateTimeline();
+
+/* PAGE SWITCH */
+function next(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  if(id=="final") startLoveNote();
+}
+
+/* RUDE NO */
+function rudeNo(){
+  next("typePage");
+
+  let text="good jaana its really hurts me too muuch i never ever break howa tha itna jitna muje is bar kar diyao plzz donat do that again love to so much muwwh 😘";
+  let i=0;
+  document.getElementById("typeText").innerHTML="";
+
+  function type(){
+    if(i<text.length){
+      document.getElementById("typeText").innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(type,30);
+    } else {
+      setTimeout(()=>next("p3"),1000);
+    }
+  }
+  type();
+}
+
+/* MISS */
+function missYes(){ next("a1"); setTimeout(()=>next("p4"),1500); }
+
+/* LOVE */
+function loveYes(){ next("a2"); setTimeout(()=>next("p5"),1500); }
+
+/* LIVE */
+function liveYes(){ next("a3yes"); setTimeout(()=>next("final"),1500); }
+function liveNo(){ next("a3no"); setTimeout(()=>next("final"),1500); }
+
+/* NO BUTTON MOVE */
+function moveNo(){
+  let btn=document.getElementById("noBtn");
+  btn.style.left=Math.random()*80+"vw";
+  btn.style.top=Math.random()*80+"vh";
+}
+
+/* LOVE NOTE (FULL RESTORED EXACT) */
+function startLoveNote(){
+
+  let text = `To My Cutie si jana (bandri,khasoors )
+
+yara i know you are not mentally stable bohat sari tensions ha tumhy or mujy behtar ya kon janta family issues bala bala but ma hun na tumhaaray sath tumharay har pal k liye muje bataay karo muje sy baat kia karo jaan this time i feel like i donat have any importance muje bohat ziyada bura laga k yar ma jinata cheezo ko set karny ki try karta utni kharab ho jati or bohat ganda ignore kia is bar muje bohat afsoos howa iska pata ha ya word space meray liye bohat ajeeb like ma pagal ho jata k jab ma hun har cheez solve karany ma help karta or tum muje hi side kar deti yaar liike how can i tell you is bar ma bohat ziyada dishurt ho giya tha plzzz dubara kabhii mat karna aesay jan ho meri tum kessay ma tumhy aklea chor dun or ager ni acha lagata meray sath rehna toh ap tab bhi muje bol sakti m a ufff tak nai karon ga magar hope so k aesa na h dubara 
+
+love you so much bandri gusay ma bandri churail ban jati 😅 or fir meko veee sarra howa jin bana deti hush love you again`;
+
+  let i=0;
+  document.getElementById("typeLoveNote").innerHTML="";
+
+  function type(){
+    if(i<text.length){
+      document.getElementById("typeLoveNote").innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(type,15);
+    }
+  }
+  type();
+}
+
+/* FLOAT HEARTS */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="floating-heart";
+  h.innerHTML="💖";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+},300);
+
+</script>
+
+</body>
+</html>
